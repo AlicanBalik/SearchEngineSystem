@@ -1,0 +1,150 @@
+@(searched: Search, searchForm: Form[Search], searchList: List[Search], query: SearchQuery, contactForm: Form[Contact], start: Int, startplus: Int, max: Int)
+<!DOCTYPE html>
+<html>
+<head>
+<title>@query.getQ() - PDF Search Engine</title>
+
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" id="font-awesome-css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" media="screen">
+
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/searchList.css")">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<ul class="nav nav-tabs ">
+       <li role="presentation "><a href="/ ">Homepage</a></li>
+    	<li role="presentation "><a href="@routes.Application.contribute() "><b>Contribute a PDF</b></a></li>
+        <li role="presentation " ><a href="@routes.Application.contact()">Contact</a></li>
+        @if("-1" != session.get("username")){
+          	 	@if(null != session.get("username")) {
+          	 	        <li role="presentation " style="float:right;"><a href="@routes.Application.logout() ">Logout</a></li>
+          	 	}
+		} else {
+			  <li role="presentation " style="float:right;"><a href="@routes.Application.login() ">Login</a></li>
+		 }
+    </ul>
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<form action="@routes.Application.search(0)" method="GET">
+				<center>
+					<a href="/"><img src="@routes.Assets.at("images/pdfLogo.jpg")" height="70px" width="70px" alt="PDF Logo" /></a>
+				</center>
+				<div class="input-group ">
+					<input type="text" name="q" class="form-control"
+						style="height: 34px" placeholder="Search for PDF" maxlength="400"
+						value="@query.getQ()">
+						<span class="input-group-btn ">
+						<button class="btn btn-default " type="button " onClick="buttonSubmitClicked(event)">Search</button> 
+						@*
+						"@searchForm.data().get("q")"
+						 @searched.q 
+						searching. *@
+					</span>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-4 result-found">
+	 @if(searched.getOutputFound() == 0) { 
+	No result found. 
+	} else {
+		@if(searched.getOutputFound() == 1) { 
+			@searched.getOutputFound() result found.
+		} else { 
+			@searched.getOutputFound() results found. 
+		 }
+	  } 
+	   </div>
+	  
+	</div>
+	
+	<br> @if(searchList.isEmpty()) {
+	<div class = "not-found-error">
+	<p class = "p-no-match" id = "first" > Your search - <b><em>@query.getQ()</em></b> - did not match any documents.</p> 
+	<p class = "p-no-match" id = "second" >Suggestions:</p> 
+	<ul style="margin-left:1.3em;margin-bottom:2em">
+	<li>Try different keywords.</li></ul>
+		@* https://en.wikipedia.org/wiki/Data_URI_scheme#Web_browser_support *@
+	}else {
+	</div>
+				@for(search <- searchList) {
+				
+
+  <div class="content ">
+    <div class="row">
+      <div class="a-col-left-img col-xs-12 col-sm-6 col-lg-8">
+      	<img class="img-rounded img-responsive" src="data:image/png;base64,@search.getOutputPicture()" alt="Cover_page">
+      </div>
+      <div class="a-col-right col-xs-6 col-lg-4">
+     
+          <li><span class= "title">@search.getOutputTitle()</span></li>
+          <li><span class= "author">by @search.getOutputAuthor()</span></li>
+          <li><span class= "npages">Number of Pages: @search.getOutputPage()</span></li>
+          <li><span class= "cdate">Creation Date: @search.getOutputCreationDate()</span></li>
+          <li><span class= "producer">Producer: @search.getOutputProducer()</span></li>
+          <li><a class = "download" href="@routes.Application.download(search.getOutputId())">Download</a> 
+          @if(search.getOutputDownloadCounter() == 0) { 
+          <span class="dCounter">Be the first one</span>
+          } else { 
+          	@if(search.getOutputDownloadCounter() == 1) {
+          <span class="dCounter">@search.getOutputDownloadCounter() time</span>
+          } else {
+          <span class="dCounter">@search.getOutputDownloadCounter() times</span>
+          		 }
+          	} </li> 
+          	 @if(null != session.get("username")){
+          	 	@if("-1" != session.get("username")) {
+          		<div class="btn-group">
+          		
+          		 <button class="btn btn-danger btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		  Action <span class="caret"></span>
+          		 </button>
+          		 <ul class="dropdown-menu">
+          		 <li><a class = "delete" onclick = "confirm()" href="@routes.Application.delete(search.getOutputId())">Delete</a></li>
+          		 </ul>
+          		</div>  
+          		}  
+          	 }      
+      </div>
+    </div>
+  </div>
+				}
+	} 
+	<hr />
+	@if(!searchList.isEmpty()) {
+	<center> @* for loop for links *@
+		<div class="pagination">
+			<ul class="pagination" id="myPagination">
+				@if(start != 0) {
+					<li><a class="pagNumber" href="/search/0/?q=@query.getQ()" >First</a></li>
+				}
+				@if(start-1 != -1) {
+					<li><a class="pagNumber" href="/search/@(start-1)/?q=@query.getQ()" >«</a></li>
+				}
+				@if(start != max) {
+					<li><a class="pagNumber" href="/search/@(start+1)/?q=@query.getQ()" >»</a></li>
+				}
+				@if(max != 0 || max != start){
+				<li><a class="pagNumber" href="/search/@max/?q=@query.getQ()" >Last</a></li>
+				}
+			</ul>
+		</div>
+	</center>
+	}
+<div class="scroll-top-wrapper ">
+	<span class="scroll-top-inner">
+		<i class="fa fa-2x fa-arrow-circle-up"></i>
+	</span>
+</div>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+ <script type="text/javascript " src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script> 
+<script type="text/javascript " src="@routes.Assets.at("javascripts/index.js")"></script>
+<script type="text/javascript " src="@routes.Assets.at( "javascripts/bootPage.js") "></script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,142 @@
+.content {
+	border-top: 1%;
+	border-bottom: solid thin #dbdbdb;
+	margin-left: 3%;
+	margin-right: 3%;
+	font-family: 'Open-Sans';
+	font-size: 18px;
+	cursor:default;
+}
+.row {
+	margin-bottom: .5%;
+	margin-top: .5%;
+}
+
+.hidden-phone>.content>border-right {
+	display: none;
+}
+
+li {
+	text-decoration: none;
+	list-style: none;
+	
+}
+
+.content span:hover {
+	text-decoration: none;
+	color: #777777;
+}
+
+.picture {
+	height: 200px;
+	width: 150px;
+}
+
+.npage, .cdate, .producer {
+	margin-bottom: 3px;
+}
+
+.title {
+	font-size: 32px;
+	color: #0099ff;
+}
+
+.author {
+	font-size: .85em;
+	color: #454545;
+}
+
+.download {
+	margin-top: 15px;
+}
+
+.a-col-left-img {
+	width: 200px;
+	margin-left: 3%;
+	margin-top: .3%;
+	float: left;
+}
+
+.a-col-right {
+	margin-left: .1%;
+	float: left;
+}
+
+.result-found {
+	float: right;
+	margin-top: 2%;
+}
+
+.p-no-match {
+	margin-left: 1em;
+}
+
+#first {
+	padding-top: .33em;
+}
+
+#second {
+	margin-top: 1em;
+	'
+}
+
+.scroll-top-wrapper {
+    position: fixed;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden;
+	text-align: center;
+	z-index: 99999999;
+    background-color: #777777;
+	color: #eeeeee;
+	width: 50px;
+	height: 48px;
+	line-height: 48px;
+	right: 30px;
+	bottom: 30px;
+	padding-top: 2px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.scroll-top-wrapper:hover {
+	background-color: #888888;
+}
+.scroll-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+	opacity: 1.0;
+}
+.scroll-top-wrapper i.fa {
+	line-height: inherit;
+}
+.dCounter {
+	font-size:16px;
+}
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}

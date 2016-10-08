@@ -1,0 +1,48 @@
+@(cc: Contribution, contributeList: List[Contribution])
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/contributeList.css")">
+<title>Admin Panel</title>
+</head>
+<body>
+<ul class="nav nav-tabs ">
+       <li role="presentation "><a href="/ ">Homepage</a></li>
+    	<li role="presentation "><a href="@routes.Application.upload() "><b>Upload PDF</b></a></li>
+        <li role="presentation " class="contactLi"><a href="@routes.Application.contact()">Contact</a></li>
+        @if("-1" != session.get("username")){
+          	 	@if(null != session.get("username")) {
+          	 	        <li role="presentation " style="float:right;"><a href="@routes.Application.logout() ">Logout</a></li>
+          	 	}
+		} else {
+			  <li role="presentation " style="float:right;"><a href="@routes.Application.login() ">Login</a></li>
+		 }
+    </ul>
+	<br>
+	<div class="content">
+		@if(contributeList.isEmpty()) {
+		<h1>There is no pending request for contribution.</h1>
+		} else {
+			  	@for(contribute <- contributeList) {
+				<div class="content ">
+	    <div class="row">
+	      <div class="a-col-right col-xs-6 col-lg-4">
+			  <li><span class= "title">Title: @contribute.getTitle()</span></li>
+	          <li><span class= "name">PDF Name: @contribute.getName()</span></li>
+	          <li><span class= "author">Author: @contribute.getAuthor()</span></li>
+	          <li><span class= "producer">Producer: @contribute.getProducer()</span></li>
+	          <li><a class = "download" href="@routes.Application.downloadContribute(contribute.getId())">Download</a></li> 
+	          <li>
+	          <a class = "delete" onclick = "confirm()" href="@routes.Application.deleteContribute(contribute.getId())">Delete</a>
+	          </li> 
+	          <li>@contribute.getEmail()</li>
+				<hr>
+	      </div>
+	    </div>
+	  </div>
+			}
+		}
+	 </div>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/riba.js")"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+.form {
+	margin-left: 5%;
+	margin-top: 5%;
+}
+.email {
+	margin-top: 15px;
+}
+#drop-zone {
+    width: 40%;
+    height: 200px;
+    position:absolute;
+    border: 2px dashed rgba(0,0,0,.3);
+    border-radius: 20px;
+    font-family: Arial;
+    text-align: center;
+    position: relative;
+    line-height: 180px;
+    font-size: 20px;
+    color: rgba(0,0,0,.3);
+}
+
+    #drop-zone input {
+        position: absolute;
+        cursor: pointer;
+        left: 0px;
+        top: 0px;
+        /*Important This is only comment out for demonstration purpeses.
+        opacity:0; */
+    }
+
+    #drop-zone.mouse-over {
+        border: 2px dashed rgba(0,0,0,.5);
+        color: rgba(0,0,0,.5);
+    }
+
+
+#clickHere {
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: 20px;
+    line-height: 26px;
+    color: white;
+    font-size: 12px;
+    width: 100px;
+    height: 26px;
+    border-radius: 4px;
+    background-color: #3b85c3;
+
+}
+
+    #clickHere:hover {
+        background-color: #4499DD;
+
+    }
+.btn {
+	margin-top: 10px;
+}
+ 

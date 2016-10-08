@@ -1,0 +1,17 @@
+.content {
+	border-top: 1%;
+	margin-left: 3%;
+	margin-right: 3%;
+	font-family: 'Open-Sans';
+	font-size: 18px;
+}
+li {
+	text-decoration: none;
+	list-style: none;
+	
+}
+.disable {
+	float:right;
+	pointer-events: none;
+	cursor: default;
+}

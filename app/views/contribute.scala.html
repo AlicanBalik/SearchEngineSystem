@@ -1,0 +1,57 @@
+@(contributeForm: Form[Contribution])
+<!DOCTYPE html>
+<html>
+<head>
+<title>Riba Search Engine - Contribute</title>
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/contribute.css")">
+</head>
+<body onload="myFunction()">
+<ul class="nav nav-tabs ">
+       <li role="presentation "><a href="/ ">Homepage</a></li>
+    	<li role="presentation "><a href="@routes.Application.contribute() "><b>Contribute a PDF</b></a></li>
+        <li role="presentation " class="contactLi"><a href="@routes.Application.contact()">Contact</a></li>
+        @if("-1" != session.get("username")){
+          	 	@if(null != session.get("username")) {
+          	 	        <li role="presentation " style="float:right;"><a href="@routes.Application.logout() ">Logout</a></li>
+          	 	}
+		} else {
+			  <li role="presentation " style="float:right;"><a href="@routes.Application.login() ">Login</a></li>
+		 }
+    </ul>
+	<div class="col-md-12 form">
+		@helper.form(action = routes.Application.uploadCPost,'id -> "upload", 'enctype ->
+		"multipart/form-data") {
+		<fieldset class="form-group">
+			<div class="col-md-12">
+			<div id="drop-zone">
+			Drag-drop here
+			<div id="clickHere">
+			or click here
+				<input type="file" class=inputFile id="inputFile" name="pdf"
+					accept="application/pdf" onchange="myFunction()" size="35">
+					</div>
+					</div>
+				<div class="col-md-4">
+					<input type="email" id="email" name="email"
+						class="email form-control" placeholder="Enter your email address"
+						value="@contributeForm.data().get("email")" required>
+				</div>
+			</div>
+			<small class="text-muted">We'll never share your email with
+				anyone else.</small>
+			<p>
+				<input type="submit" onClick="buttonSubmitClicked(event)"
+					class="btn btn-primary">
+			</p>
+		</fieldset>
+		<span id="details"></span>
+		}
+	</div>
+	<div class=col-md-12></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/contribute.js")"></script>	
+</body>
+</html>

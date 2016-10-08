@@ -1,0 +1,55 @@
+@(query: SearchQuery, contactForm: Form[Contact])
+@*query: Form[SearchQuery] --   @query.data().get("q")*@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PDF Search Engine</title>
+    <link href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="shortcut icon" type="image/jpg" href="@routes.Assets.at("images/pdfLogo.jpg")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/contact.css ")">
+    
+</head>
+
+<body>
+    <ul class="nav nav-tabs ">
+       <li role="presentation "><a href="/ ">Homepage</a></li>
+    	<li role="presentation "><a href="@routes.Application.contribute() "><b>Contribute a PDF</b></a></li>
+        <li role="presentation "><a href="@routes.Application.contact">Contact</a></li>
+        @if("-1" != session.get("username")){
+          	 	@if(null != session.get("username")) {
+          	 	        <li role="presentation " style="float:right;"><a href="@routes.Application.logout() ">Logout</a></li>
+          	 	}
+		} else {
+			  <li role="presentation " style="float:right;"><a href="@routes.Application.login() ">Login</a></li>
+		 }
+    </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+    <form action="@routes.Application.search(0)" method="GET">
+        <center><a href="/"><img src="@routes.Assets.at("images/pdfLogo.jpg")" id="logo" height="70px" width="70px" alt="PDF Logo" /></a></center>
+        <div class="input-group ">
+            <input type="text" name="q" id="q" class="form-control" style="height:34px" placeholder="Search PDF" value="@query.getQ()" maxlength="400">
+            <span class="input-group-btn ">
+<button class="btn btn-default " type="button " id="btnSearch" onClick="buttonSubmitClicked(event)">Search</button>
+</span>
+</form>
+</div>
+<div class="col-md-4"></div>
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/index.js")"></script>
+    <script type="text/javascript " src="@routes.Assets.at( "javascripts/contact.js") "></script>
+</body>
+
+</html>
