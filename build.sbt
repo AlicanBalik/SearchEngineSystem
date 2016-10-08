@@ -1,4 +1,5 @@
 name := "SearchEngine"
+//herokuAppName in Compile := "morning-plains-57292"
 
 version := "1.0-SNAPSHOT"
 
