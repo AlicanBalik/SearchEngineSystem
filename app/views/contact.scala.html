@@ -28,35 +28,34 @@
 			  <li role="presentation " style="float:right;"><a href="@routes.Application.login() ">Login</a></li>
 		 }
     </ul>
-	<div class="contact" id="contact">
-    <span class="close" style="display:none;">X</span>
-	    <div class="frame">
-		    @helper.form(action = routes.Application.submitContact(), 'class -> "form", 'method -> "POST", 'id -> "contactForm") {
-				
-				    <p class="name">
-							<input type="text" id="nameSurname" required  name="nameSurname" value="@contactForm.data().get("nameSurname")" id="name" placeholder="Alican Balik" />
-							<label for="name">Name</label>
-						</p>
-						<p class="email">
-							<input type="email" name="email" required id="email" value="@contactForm.data().get("email")" placeholder="mail&#64;example.com" />
-							<label for="email">Email</label>
-						</p>
-						<p class="title">
-							<input type="text"  name="title" required id="title" value="@contactForm.data().get("title")" id="title" placeholder="Title" />
-							<label for="title">Title</label>
-						</p>
-						<p class="text">
-							<textarea name="message" id="message" required  value="@contactForm.data().get("message")" placeholder="Write something"></textarea>
-						</p>
-						<p>
-						<span class="label label-danger">@contactForm.data().get("alert")</span>
-						</p>
-						<p class="submit">
-							<input type="submit" onClick="buttonClick()" value="Send" />
-						</p>
-		    }
-	    </div>
-    </div>
+		    <div style="margin-top:15px;">
+		    	<center>
+				    @helper.form(action = routes.Application.submitContact(), 'class -> "form", 'method -> "POST", 'id -> "contactForm") {
+						
+						    <p class="name">
+									<input type="text" id="nameSurname" required  name="nameSurname" value="@contactForm.data().get("nameSurname")" id="name" placeholder="Alican Balik" />
+									<label for="name">Name</label>
+								</p>
+								<p class="email">
+									<input type="email" name="email" required id="email" value="@contactForm.data().get("email")" placeholder="mail&#64;example.com" />
+									<label for="email">Email</label>
+								</p>
+								<p class="title">
+									<input type="text"  name="title" required id="title" value="@contactForm.data().get("title")" id="title" placeholder="Title" />
+									<label for="title">Title</label>
+								</p>
+								<p class="text">
+									<textarea name="message" id="message" required  value="@contactForm.data().get("message")" placeholder="Write something"></textarea>
+								</p>
+								<p>
+								<span class="label label-danger">@contactForm.data().get("alert")</span>
+								</p>
+								<p class="submit">
+									<input type="submit" onClick="buttonClick()" value="Send" />
+								</p>
+				    }
+		    	</center>
+		    </div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script type="text/javascript " src="@routes.Assets.at( "javascripts/bootstrap.min.js") "></script>
 	<script type="text/javascript " src="@routes.Assets.at( "javascripts/contact.js") "></script>
